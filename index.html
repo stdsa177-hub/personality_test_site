@@ -4,34 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>노화 성격 테스트</title>
+    
+    <!-- Google Fonts 추가 -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+
     <style>
-        /* 전체 레이아웃 */
+        /* 기본 스타일 */
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Noto Sans KR', sans-serif;
             margin: 0;
             padding: 0;
             display: flex;
+            height: 100vh;
         }
 
-        /* 왼쪽 목차 스타일 */
+        /* 왼쪽 목차 바 */
         .sidebar {
             width: 80px;
             background-color: #E74C3C;
             color: white;
-            padding: 20px;
-            writing-mode: vertical-rl; /* 세로 글씨 */
-            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 18px;
             font-weight: bold;
+            writing-mode: vertical-rl; /* 세로 글씨 */
         }
 
         /* 메인 컨텐츠 영역 */
         .content {
             flex: 1;
-            padding: 30px;
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
             text-align: center;
         }
 
@@ -40,126 +46,107 @@
             font-size: 100px;
             font-weight: bold;
             color: #E74C3C;
-            position: relative;
-        }
-
-        /* 질문 스타일 */
-        .question-text {
-            font-size: 18px;
-            background-color: #FADBD8;
-            display: inline-block;
-            padding: 5px 10px;
-            border-radius: 5px;
         }
 
         /* 페이지 정보 */
         .page {
             font-size: 18px;
             font-weight: bold;
-            margin-top: -10px;
             color: #555;
+            margin-top: -15px;
         }
 
-        /* 선택지 스타일 */
-        .choices {
-            margin-top: 20px;
+        /* 질문 스타일 */
+        .question-text {
+            font-size: 20px;
+            background-color: #FADBD8;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin-top: 15px;
         }
 
-        .choices button {
+        /* 버튼 스타일 */
+        .button {
             display: block;
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            font-size: 16px;
-            cursor: pointer;
+            width: 200px;
+            padding: 15px;
+            margin-top: 20px;
+            font-size: 18px;
             border: none;
+            cursor: pointer;
             background-color: #E74C3C;
             color: white;
             border-radius: 5px;
         }
 
-        .choices button:hover {
+        .button:hover {
             background-color: #C0392B;
         }
 
-        /* 결과 페이지 */
-        #result-container {
+        /* 모든 페이지 숨기기 */
+        .page-container {
             display: none;
-            text-align: center;
         }
 
+        /* 현재 페이지 활성화 */
+        .active {
+            display: flex;
+        }
     </style>
 </head>
 <body>
 
     <div class="sidebar">목차</div>
 
-    <div class="content" id="question-container">
-        <div>
+    <div class="content">
+        <!-- 첫 번째 질문 -->
+        <div class="page-container active" id="page-1">
             <div class="question-number">1</div>
             <div class="page">9p</div>
             <div class="question-text">당신은 주변인과의 관계에서 저속노화하나요? 가속노화하나요?</div>
-            <div class="choices">
-                <button onclick="nextQuestion()">다음</button>
-            </div>
+            <button class="button" onclick="nextPage()">다음</button>
         </div>
 
-        <div>
+        <!-- 두 번째 질문 -->
+        <div class="page-container" id="page-2">
             <div class="question-number">2</div>
             <div class="page">16p</div>
             <div class="question-text">지금부터는 나의 짝꿍이 이렇게 말한다면, 당신이 보여줄 반응을 골라주세요.</div>
-            <div class="choices">
-                <button onclick="nextQuestion()">다음</button>
-            </div>
+            <button class="button" onclick="nextPage()">다음</button>
         </div>
 
-        <div>
+        <!-- 세 번째 질문 -->
+        <div class="page-container" id="page-3">
             <div class="question-number">3</div>
             <div class="page">40p</div>
             <div class="question-text">나의 짝꿍이 오늘은 마라탕이 먹고싶다고 한다. 나는 매운 걸 못먹는데...</div>
-            <div class="choices">
-                <button onclick="selectAnswer(1)">A. 그냥 매운걸 먹는다</button>
-                <button onclick="selectAnswer(2)">B. 백탕을 시킨다</button>
-                <button onclick="selectAnswer(0)">C. 나 매운거 못 먹는거 몰라?</button>
-            </div>
+            <button class="button" onclick="nextPage()">다음</button>
         </div>
 
-        <div>
+        <!-- 네 번째 질문 -->
+        <div class="page-container" id="page-4">
             <div class="question-number">4</div>
             <div class="page">50p</div>
             <div class="question-text">짝꿍과 동거를 하고 싶다! 나는 짝꿍과 알고 지낸지 얼마나 되었을까?</div>
-            <div class="choices">
-                <button onclick="selectAnswer(3)">A. 10년</button>
-                <button onclick="selectAnswer(3)">B. 5년</button>
-                <button onclick="selectAnswer(1)">C. 1년</button>
-                <button onclick="selectAnswer(0)">D. 일주일</button>
-            </div>
+            <button class="button" onclick="restartTest()">테스트 완료</button>
         </div>
     </div>
 
-    <div id="result-container">
-        <h2>결과</h2>
-        <p id="result-text"></p>
-        <button onclick="restartTest()">다시 하기</button>
-    </div>
-
     <script>
-        let score = 0;
+        let currentPage = 1;
 
-        function nextQuestion() {
-            document.getElementById("question-container").classList.remove("active");
-            document.getElementById("result-container").classList.add("active");
-        }
-
-        function selectAnswer(points) {
-            score += points;
-            nextQuestion();
+        function nextPage() {
+            document.getElementById(`page-${currentPage}`).classList.remove("active");
+            currentPage++;
+            if (currentPage <= 4) {
+                document.getElementById(`page-${currentPage}`).classList.add("active");
+            }
         }
 
         function restartTest() {
-            score = 0;
-            document.getElementById("result-container").classList.remove("active");
-            document.getElementById("question-container").classList.add("active");
+            document.getElementById(`page-${currentPage}`).classList.remove("active");
+            currentPage = 1;
+            document.getElementById(`page-${currentPage}`).classList.add("active");
         }
     </script>
 
