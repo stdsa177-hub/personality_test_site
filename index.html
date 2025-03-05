@@ -5,94 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>노화 성격 테스트</title>
     
-    <!-- Google Fonts 추가 -->
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+    <!-- Google Fonts: Gowun Dodum 적용 -->
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
 
-    <style>
-        /* 기본 스타일 */
-        body {
-            font-family: 'Noto Sans KR', sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            height: 100vh;
-        }
-
-        /* 왼쪽 목차 바 */
-        .sidebar {
-            width: 80px;
-            background-color: #E74C3C;
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            font-weight: bold;
-            writing-mode: vertical-rl; /* 세로 글씨 */
-        }
-
-        /* 메인 컨텐츠 영역 */
-        .content {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            text-align: center;
-        }
-
-        /* 큰 숫자 (질문 번호) */
-        .question-number {
-            font-size: 100px;
-            font-weight: bold;
-            color: #E74C3C;
-        }
-
-        /* 페이지 정보 */
-        .page {
-            font-size: 18px;
-            font-weight: bold;
-            color: #555;
-            margin-top: -15px;
-        }
-
-        /* 질문 스타일 */
-        .question-text {
-            font-size: 20px;
-            background-color: #FADBD8;
-            padding: 10px 15px;
-            border-radius: 5px;
-            margin-top: 15px;
-        }
-
-        /* 버튼 스타일 */
-        .button {
-            display: block;
-            width: 200px;
-            padding: 15px;
-            margin-top: 20px;
-            font-size: 18px;
-            border: none;
-            cursor: pointer;
-            background-color: #E74C3C;
-            color: white;
-            border-radius: 5px;
-        }
-
-        .button:hover {
-            background-color: #C0392B;
-        }
-
-        /* 모든 페이지 숨기기 */
-        .page-container {
-            display: none;
-        }
-
-        /* 현재 페이지 활성화 */
-        .active {
-            display: flex;
-        }
-    </style>
+    <!-- CSS 연결 -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -101,54 +18,47 @@
     <div class="content">
         <!-- 첫 번째 질문 -->
         <div class="page-container active" id="page-1">
-            <div class="question-number">1</div>
-            <div class="page">9p</div>
             <div class="question-text">당신은 주변인과의 관계에서 저속노화하나요? 가속노화하나요?</div>
             <button class="button" onclick="nextPage()">다음</button>
         </div>
 
         <!-- 두 번째 질문 -->
         <div class="page-container" id="page-2">
-            <div class="question-number">2</div>
-            <div class="page">16p</div>
             <div class="question-text">지금부터는 나의 짝꿍이 이렇게 말한다면, 당신이 보여줄 반응을 골라주세요.</div>
             <button class="button" onclick="nextPage()">다음</button>
         </div>
 
-        <!-- 세 번째 질문 -->
+        <!-- 세 번째 질문 (페이지 번호 표시) -->
         <div class="page-container" id="page-3">
-            <div class="question-number">3</div>
-            <div class="page">40p</div>
-            <div class="question-text">나의 짝꿍이 오늘은 마라탕이 먹고싶다고 한다. 나는 매운 걸 못먹는데...</div>
-            <button class="button" onclick="nextPage()">다음</button>
+            <div class="question-number">1</div>
+	    <div class="question-text">나의 짝꿍이 오늘은 마라탕이 먹고싶다고 한다.<br> 나는 매운 걸 못먹는데...</div>
+            <button class="button" onclick="nextPage()">A. 그냥 매운 걸 먹는다</button>
+            <button class="button" onclick="nextPage()">B. 백탕을 시킨다</button>
+            <button class="button" onclick="nextPage()">C. 나 매운 거 못 먹는 거 몰라?</button>
         </div>
 
-        <!-- 네 번째 질문 -->
+        <!-- 네 번째 질문 (파트너 복장 관련) -->
         <div class="page-container" id="page-4">
-            <div class="question-number">4</div>
-            <div class="page">50p</div>
-            <div class="question-text">짝꿍과 동거를 하고 싶다! 나는 짝꿍과 알고 지낸지 얼마나 되었을까?</div>
-            <button class="button" onclick="restartTest()">테스트 완료</button>
+            <div class="question-number">2</div>
+            <div class="question-text">함께 파티에 갑니다!<br>파트너의 복장이 너무 개방적인 것 같아요...</div>
+            <button class="button" onclick="nextPage()">A. 입고 싶은 대로 입어~</button>
+            <button class="button" onclick="nextPage()">B. 네가 원한다면 나도 새로운 스타일에 도전해볼게!</button>
+            <button class="button" onclick="nextPage()">C. 옷이 그게 뭐야?</button>
+        </div>
+
+        <!-- 다섯 번째 질문 (페이지 번호 표시) -->
+        <div class="page-container" id="page-5">
+            <div class="question-number">3</div>
+	    <div class="question-text">짝꿍과 동거를 하고 싶다!<br> 나는 짝꿍과 알고 지낸지 얼마나 되었을까?</div>
+            <button class="button" onclick="restartTest()">A. 10년</button>
+            <button class="button" onclick="restartTest()">B. 5년</button>
+            <button class="button" onclick="restartTest()">C. 1년</button>
+            <button class="button" onclick="restartTest()">D. 일주일</button>
         </div>
     </div>
 
-    <script>
-        let currentPage = 1;
-
-        function nextPage() {
-            document.getElementById(`page-${currentPage}`).classList.remove("active");
-            currentPage++;
-            if (currentPage <= 4) {
-                document.getElementById(`page-${currentPage}`).classList.add("active");
-            }
-        }
-
-        function restartTest() {
-            document.getElementById(`page-${currentPage}`).classList.remove("active");
-            currentPage = 1;
-            document.getElementById(`page-${currentPage}`).classList.add("active");
-        }
-    </script>
+    <!-- JavaScript 연결 -->
+    <script src="script.js"></script>
 
 </body>
 </html>

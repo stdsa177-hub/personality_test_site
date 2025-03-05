@@ -1,20 +1,108 @@
+/* 기본 스타일 */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Gowun Dodum', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #fff;
+}
+
+/* 왼쪽 목차 바 */
+.sidebar {
+    width: 80px;
+    background-color: #E74C3C;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: bold;
+    writing-mode: vertical-rl;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+}
+
+/* 메인 컨텐츠 영역 */
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     text-align: center;
-    padding: 50px;
-}
-
-#quiz-container {
-    margin: 0 auto;
-    width: 80%;
+    width: 100%;
     max-width: 500px;
+    padding: 20px;
 }
 
-.answer-btn {
+/* 큰 숫자 (질문 번호) - 3페이지부터 표시 */
+.question-number {
+    font-size: 80px;
+    font-weight: bold;
+    color: #E74C3C;
+}
+
+/* 질문 스타일 */
+.question-text {
+    font-size: 20px;
+    background-color: #FADBD8;
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 10px;
+    width: 100%;
+}
+
+/* 버튼 스타일 */
+.button {
     display: block;
     width: 100%;
-    padding: 10px;
-    margin: 10px 0;
+    max-width: 400px;
+    padding: 15px;
+    margin-top: 15px;
     font-size: 18px;
+    border: none;
     cursor: pointer;
+    background-color: #E74C3C;
+    color: white;
+    border-radius: 10px;
+    transition: background 0.3s ease-in-out;
 }
+
+.button:hover {
+    background-color: #C0392B;
+}
+
+/* 모든 페이지 숨기기 */
+.page-container {
+    display: none;
+}
+
+/* 현재 페이지 활성화 */
+.active {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 600px) {
+    .question-number {
+        font-size: 60px;
+    }
+
+    .question-text {
+        font-size: 18px;
+        padding: 10px;
+    }
+
+    .button {
+        font-size: 16px;
+        padding: 12px;
+    }
+}
+

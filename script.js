@@ -1,25 +1,18 @@
-const questions = [
-    { question: "친구들과 놀 때 어떤 걸 더 좋아해?", answers: ["대화하기", "활동하기"] },
-    { question: "여행할 때 선호하는 것은?", answers: ["계획된 일정", "즉흥적인 여행"] }
-];
+let currentPage = 1;
 
-let currentQuestion = 0;
-
-function nextQuestion(answer) {
-    currentQuestion++;
-    if (currentQuestion < questions.length) {
-        showQuestion();
-    } else {
-        document.getElementById('quiz-container').innerHTML = `<h2>테스트가 완료되었습니다!</h2>`;
+// 다음 페이지로 이동하는 함수
+function nextPage() {
+    document.getElementById(`page-${currentPage}`).classList.remove("active");
+    currentPage++;
+    if (currentPage <= 5) {
+        document.getElementById(`page-${currentPage}`).classList.add("active");
     }
 }
 
-function showQuestion() {
-    const q = questions[currentQuestion];
-    document.getElementById('question').textContent = q.question;
-    const buttons = document.querySelectorAll('.answer-btn');
-    buttons[0].textContent = q.answers[0];
-    buttons[1].textContent = q.answers[1];
+// 테스트를 다시 시작하는 함수
+function restartTest() {
+    document.getElementById(`page-${currentPage}`).classList.remove("active");
+    currentPage = 1;
+    document.getElementById(`page-${currentPage}`).classList.add("active");
 }
 
-showQuestion();
