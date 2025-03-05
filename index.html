@@ -5,93 +5,161 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>노화 성격 테스트</title>
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
-        .page { display: none; }
-        .active { display: block; }
-        button { display: block; margin: 10px auto; padding: 10px; font-size: 16px; }
+        /* 전체 레이아웃 */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        /* 왼쪽 목차 스타일 */
+        .sidebar {
+            width: 80px;
+            background-color: #E74C3C;
+            color: white;
+            padding: 20px;
+            writing-mode: vertical-rl; /* 세로 글씨 */
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        /* 메인 컨텐츠 영역 */
+        .content {
+            flex: 1;
+            padding: 30px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            text-align: center;
+        }
+
+        /* 큰 숫자 (질문 번호) */
+        .question-number {
+            font-size: 100px;
+            font-weight: bold;
+            color: #E74C3C;
+            position: relative;
+        }
+
+        /* 질문 스타일 */
+        .question-text {
+            font-size: 18px;
+            background-color: #FADBD8;
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        /* 페이지 정보 */
+        .page {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: -10px;
+            color: #555;
+        }
+
+        /* 선택지 스타일 */
+        .choices {
+            margin-top: 20px;
+        }
+
+        .choices button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            background-color: #E74C3C;
+            color: white;
+            border-radius: 5px;
+        }
+
+        .choices button:hover {
+            background-color: #C0392B;
+        }
+
+        /* 결과 페이지 */
+        #result-container {
+            display: none;
+            text-align: center;
+        }
+
     </style>
 </head>
 <body>
 
-    <h1>노화 성격 테스트</h1>
+    <div class="sidebar">목차</div>
 
-    <!-- 1페이지: 관계에서 노화 유형 -->
-    <div class="page active" id="page-1">
-        <p>당신은 주변인과의 관계에서<br>저속노화하나요? 가속노화하나요?</p>
-        <button onclick="nextPage(2)">다음</button>
+    <div class="content" id="question-container">
+        <div>
+            <div class="question-number">1</div>
+            <div class="page">9p</div>
+            <div class="question-text">당신은 주변인과의 관계에서 저속노화하나요? 가속노화하나요?</div>
+            <div class="choices">
+                <button onclick="nextQuestion()">다음</button>
+            </div>
+        </div>
+
+        <div>
+            <div class="question-number">2</div>
+            <div class="page">16p</div>
+            <div class="question-text">지금부터는 나의 짝꿍이 이렇게 말한다면, 당신이 보여줄 반응을 골라주세요.</div>
+            <div class="choices">
+                <button onclick="nextQuestion()">다음</button>
+            </div>
+        </div>
+
+        <div>
+            <div class="question-number">3</div>
+            <div class="page">40p</div>
+            <div class="question-text">나의 짝꿍이 오늘은 마라탕이 먹고싶다고 한다. 나는 매운 걸 못먹는데...</div>
+            <div class="choices">
+                <button onclick="selectAnswer(1)">A. 그냥 매운걸 먹는다</button>
+                <button onclick="selectAnswer(2)">B. 백탕을 시킨다</button>
+                <button onclick="selectAnswer(0)">C. 나 매운거 못 먹는거 몰라?</button>
+            </div>
+        </div>
+
+        <div>
+            <div class="question-number">4</div>
+            <div class="page">50p</div>
+            <div class="question-text">짝꿍과 동거를 하고 싶다! 나는 짝꿍과 알고 지낸지 얼마나 되었을까?</div>
+            <div class="choices">
+                <button onclick="selectAnswer(3)">A. 10년</button>
+                <button onclick="selectAnswer(3)">B. 5년</button>
+                <button onclick="selectAnswer(1)">C. 1년</button>
+                <button onclick="selectAnswer(0)">D. 일주일</button>
+            </div>
+        </div>
     </div>
 
-    <!-- 2페이지: 짝꿍이 말할 때 반응 -->
-    <div class="page" id="page-2">
-        <p>지금부터는 나의 짝꿍이 이렇게 말한다면,<br>당신이 보여줄 반응을 골라주세요.</p>
-        <p>짝꿍은 연인, 배우자, 친구, 혹은 가상의 인물로 생각해도 좋습니다.</p>
-        <button onclick="nextPage(3)">다음</button>
-    </div>
-
-    <!-- 3페이지: 마라탕 질문 -->
-    <div class="page" id="page-3">
-        <p>나의 짝꿍이 오늘은 마라탕이 먹고싶다고 한다.<br>나는 매운 걸 못먹는데...</p>
-        <button onclick="selectAnswer(1, 1)">A. 그냥 짝꿍이 먹자하니까 매운걸 먹는다</button>
-        <button onclick="selectAnswer(1, 2)">B. 마라탕 먹자! 라고 하고 나는 백탕을 시킨다</button>
-        <button onclick="selectAnswer(1, 0)">C. 나 매운거 못 먹는거 몰라?</button>
-    </div>
-
-    <!-- 4페이지: 파티 복장 질문 -->
-    <div class="page" id="page-4">
-        <p>함께 파티에 갑니다!<br>파트너의 복장이 너무 개방적인 것 같아요...</p>
-        <button onclick="selectAnswer(2, 2)">A. 입고 싶은 대로 입어~</button>
-        <button onclick="selectAnswer(2, 2)">B. 네가 원한다면 나도 새로운 스타일에 도전해볼게!</button>
-        <button onclick="selectAnswer(2, 0)">C. 옷이 그게 뭐야?</button>
-    </div>
-
-    <!-- 5페이지: 동거 질문 -->
-    <div class="page" id="page-5">
-        <p>짝꿍과 동거를 하고 싶다!<br>나는 짝꿍과 알고 지낸지 얼마나 되었을까?</p>
-        <button onclick="selectAnswer(3, 3)">A. 10년</button>
-        <button onclick="selectAnswer(3, 3)">B. 5년</button>
-        <button onclick="selectAnswer(3, 1)">C. 1년</button>
-        <button onclick="selectAnswer(3, 0)">D. 일주일</button>
-    </div>
-
-    <!-- 결과 페이지 -->
-    <div class="page" id="result-page">
+    <div id="result-container">
         <h2>결과</h2>
         <p id="result-text"></p>
         <button onclick="restartTest()">다시 하기</button>
     </div>
 
     <script>
-        let currentPage = 1;
         let score = 0;
 
-        function nextPage(next) {
-            document.getElementById(`page-${currentPage}`).classList.remove("active");
-            document.getElementById(`page-${next}`).classList.add("active");
-            currentPage = next;
+        function nextQuestion() {
+            document.getElementById("question-container").classList.remove("active");
+            document.getElementById("result-container").classList.add("active");
         }
 
-        function selectAnswer(questionIndex, points) {
+        function selectAnswer(points) {
             score += points;
-            nextPage(currentPage + 1);
-
-            if (currentPage === 6) {
-                showResult();
-            }
-        }
-
-        function showResult() {
-            document.getElementById("page-5").classList.remove("active");
-            document.getElementById("result-page").classList.add("active");
-
-            let resultText = (score >= 5) ? "당신은 저속노화를 하고 있습니다!" : "당신은 가속노화를 하고 있습니다!";
-            document.getElementById("result-text").textContent = resultText;
+            nextQuestion();
         }
 
         function restartTest() {
             score = 0;
-            currentPage = 1;
-            document.getElementById("result-page").classList.remove("active");
-            document.getElementById("page-1").classList.add("active");
+            document.getElementById("result-container").classList.remove("active");
+            document.getElementById("question-container").classList.add("active");
         }
     </script>
 
