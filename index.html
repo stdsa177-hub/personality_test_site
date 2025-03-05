@@ -3,16 +3,98 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>가속노화? 저속노화? </title>
-    <link rel="stylesheet" href="style.css">
+    <title>노화 성격 테스트</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
+        .page { display: none; }
+        .active { display: block; }
+        button { display: block; margin: 10px auto; padding: 10px; font-size: 16px; }
+    </style>
 </head>
 <body>
-    <h1>성격 테스트</h1>
-    <div id="quiz-container">
-        <p id="question">여기에 질문이 표시됩니다.</p>
-        <button class="answer-btn" onclick="nextQuestion(1)">선택 1</button>
-        <button class="answer-btn" onclick="nextQuestion(2)">선택 2</button>
+
+    <h1>노화 성격 테스트</h1>
+
+    <!-- 1페이지: 관계에서 노화 유형 -->
+    <div class="page active" id="page-1">
+        <p>당신은 주변인과의 관계에서<br>저속노화하나요? 가속노화하나요?</p>
+        <button onclick="nextPage(2)">다음</button>
     </div>
-    <script src="script.js"></script>
+
+    <!-- 2페이지: 짝꿍이 말할 때 반응 -->
+    <div class="page" id="page-2">
+        <p>지금부터는 나의 짝꿍이 이렇게 말한다면,<br>당신이 보여줄 반응을 골라주세요.</p>
+        <p>짝꿍은 연인, 배우자, 친구, 혹은 가상의 인물로 생각해도 좋습니다.</p>
+        <button onclick="nextPage(3)">다음</button>
+    </div>
+
+    <!-- 3페이지: 마라탕 질문 -->
+    <div class="page" id="page-3">
+        <p>나의 짝꿍이 오늘은 마라탕이 먹고싶다고 한다.<br>나는 매운 걸 못먹는데...</p>
+        <button onclick="selectAnswer(1, 1)">A. 그냥 짝꿍이 먹자하니까 매운걸 먹는다</button>
+        <button onclick="selectAnswer(1, 2)">B. 마라탕 먹자! 라고 하고 나는 백탕을 시킨다</button>
+        <button onclick="selectAnswer(1, 0)">C. 나 매운거 못 먹는거 몰라?</button>
+    </div>
+
+    <!-- 4페이지: 파티 복장 질문 -->
+    <div class="page" id="page-4">
+        <p>함께 파티에 갑니다!<br>파트너의 복장이 너무 개방적인 것 같아요...</p>
+        <button onclick="selectAnswer(2, 2)">A. 입고 싶은 대로 입어~</button>
+        <button onclick="selectAnswer(2, 2)">B. 네가 원한다면 나도 새로운 스타일에 도전해볼게!</button>
+        <button onclick="selectAnswer(2, 0)">C. 옷이 그게 뭐야?</button>
+    </div>
+
+    <!-- 5페이지: 동거 질문 -->
+    <div class="page" id="page-5">
+        <p>짝꿍과 동거를 하고 싶다!<br>나는 짝꿍과 알고 지낸지 얼마나 되었을까?</p>
+        <button onclick="selectAnswer(3, 3)">A. 10년</button>
+        <button onclick="selectAnswer(3, 3)">B. 5년</button>
+        <button onclick="selectAnswer(3, 1)">C. 1년</button>
+        <button onclick="selectAnswer(3, 0)">D. 일주일</button>
+    </div>
+
+    <!-- 결과 페이지 -->
+    <div class="page" id="result-page">
+        <h2>결과</h2>
+        <p id="result-text"></p>
+        <button onclick="restartTest()">다시 하기</button>
+    </div>
+
+    <script>
+        let currentPage = 1;
+        let score = 0;
+
+        function nextPage(next) {
+            document.getElementById(`page-${currentPage}`).classList.remove("active");
+            document.getElementById(`page-${next}`).classList.add("active");
+            currentPage = next;
+        }
+
+        function selectAnswer(questionIndex, points) {
+            score += points;
+            nextPage(currentPage + 1);
+
+            if (currentPage === 6) {
+                showResult();
+            }
+        }
+
+        function showResult() {
+            document.getElementById("page-5").classList.remove("active");
+            document.getElementById("result-page").classList.add("active");
+
+            let resultText = (score >= 5) ? "당신은 저속노화를 하고 있습니다!" : "당신은 가속노화를 하고 있습니다!";
+            document.getElementById("result-text").textContent = resultText;
+        }
+
+        function restartTest() {
+            score = 0;
+            currentPage = 1;
+            document.getElementById("result-page").classList.remove("active");
+            document.getElementById("page-1").classList.add("active");
+        }
+    </script>
+
 </body>
 </html>
+
