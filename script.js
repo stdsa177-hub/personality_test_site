@@ -9,10 +9,9 @@ function nextPage() {
     }
 }
 
-// 테스트를 다시 시작하는 함수
-function restartTest() {
+// 결과 페이지 표시 함수
+function showResult() {
     document.getElementById(`page-${currentPage}`).classList.remove("active");
-    currentPage = 1;
-    document.getElementById(`page-${currentPage}`).classList.add("active");
+    document.getElementById("result-page").style.display = "block";
 }
 
