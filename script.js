@@ -1,21 +1,26 @@
 let currentPage = 1;
 let totalScore = 0;  // 총점 저장 변수
 
-// 다음 페이지로 이동하는 함수 (점수 선택 포함)
+// 페이지 이동 함수
 function nextPage(score = 0) {
-    totalScore += score;
+    totalScore += score; // 점수 누적
+
+    // 현재 페이지 숨기기
     document.getElementById(`page-${currentPage}`).classList.remove("active");
+
+    // 다음 페이지 활성화
     currentPage++;
 
-    if (currentPage <= 5) {
+    if (document.getElementById(`page-${currentPage}`)) {
         document.getElementById(`page-${currentPage}`).classList.add("active");
     } else {
-        showResult();
+        showResult(); // 마지막 질문 이후 결과 표시
     }
 }
 
 // 결과 페이지 표시 함수
 function showResult() {
+    // 모든 질문 페이지 숨김
     document.querySelectorAll(".page-container").forEach(page => {
         page.style.display = "none";
     });
