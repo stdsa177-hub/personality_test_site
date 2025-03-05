@@ -1,112 +1,39 @@
-/* 기본 스타일 */
-body {
-    font-family: 'Gowun Dodum', sans-serif;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    background-color: #fff;
-}
-
-/* 상단 목차 바 */
-.top-bar {
-    width: 100%;
-    height: 50px;
-    background-color: #E74C3C;
-    position: fixed;
-    top: 0;
-    left: 0;
-}
-
-/* 메인 컨텐츠 영역 */
-.content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    width: 100%;
-    max-width: 500px;
-    padding: 70px 20px 20px;
-}
-
-/* 큰 숫자 (질문 번호) */
-.question-number {
-    font-size: 80px;
-    font-weight: bold;
-    color: #E74C3C;
-}
-
-/* 질문 스타일 */
-.question-text {
-    font-size: 20px;
-    background-color: #FADBD8;
-    padding: 15px;
-    border-radius: 10px;
-    margin-top: 10px;
-    width: 100%;
-}
-
-/* 버튼 스타일 */
-.button {
-    display: block;
-    width: 100%;
-    max-width: 400px;
-    padding: 15px;
-    margin-top: 15px;
-    font-size: 18px;
-    border: none;
-    cursor: pointer;
-    background-color: #E74C3C;
-    color: white;
-    border-radius: 10px;
-    transition: background 0.3s ease-in-out;
-    opacity: 0;
-    transform: translateY(30px);
-    animation: fadeInUp 0.5s ease-out forwards;
-    animation-delay: 0.5s;
-}
-
-/* 버튼 애니메이션 (아래에서 위로) */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* 모든 페이지 숨기기 */
-.page-container {
-    display: none;
-}
-
-/* 현재 페이지 활성화 */
-.active {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-/* 결과 페이지 */
+/* 결과 페이지 스타일 */
 .result-container {
     display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     text-align: center;
+    padding: 50px;
+    height: 100vh; /* 화면 전체 높이 사용 */
 }
 
+/* "결과" 제목 스타일 */
 .result-container h2 {
-    font-size: 30px;
+    font-size: 40px;
+    font-weight: bold;
     color: #E74C3C;
+    margin-bottom: 20px;
 }
 
+/* 결과 설명 스타일 */
 .result-container p {
     font-size: 20px;
-    margin-top: 20px;
+    color: #333;
+    max-width: 80%;
+    line-height: 1.6;
+    margin-top: 30px;
+}
+
+/* 반응형 적용 */
+@media (max-width: 600px) {
+    .result-container h2 {
+        font-size: 30px;
+    }
+    .result-container p {
+        font-size: 18px;
+        max-width: 90%;
+    }
 }
 
